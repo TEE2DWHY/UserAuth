@@ -6,7 +6,11 @@ const authRouter = require("./routes/auth");
 const app = express();
 
 
-mongoose.connect(process.env.MONGO_URL);
+mongoose.connect(process.env.MONGO_URL).then(() => {
+    console.log("Database connection is successful")
+}).catch((err) => {
+    console.log(err)
+})
 app.use(express.json())
 
 app.use("/api", authRouter)
